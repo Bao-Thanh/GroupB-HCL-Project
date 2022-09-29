@@ -5,12 +5,12 @@
         <div class="col-lg-6">
           <div class="content text-center">
             <h1 class="mb-3">Dashboard</h1>
-            <p>Information</p>
+            <p>Only For Admin</p>
   
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent justify-content-center">
               <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+              <li class="breadcrumb-item active" aria-current="page">Product Mangament</li>
             </ol>
           </nav>
           </div>
@@ -22,15 +22,82 @@
   
   <section class="user-dashboard page-wrapper">
     <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-5 col-sm-12 col-lg-3">
-          <app-menu-info></app-menu-info>
+      <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Description</th>
+                <th scope="col">Amout</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Gear A</th>
+                <td>20 $</td>
+                <td>
+                  <img src="assets/images/product-1.jpg" class="w-25 h-25" alt="">
+                </td>
+                <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+                <td>30</td>
+                <td>Active</td>
+                <td>
+                  <button class="btn btn-dark btn-main">Edit</button>
+                  <p></p>
+                  <button class="btn btn-dark btn-main">Delete</button>
+                </td> 
+            </tr> 
+            <tr> 
+              <th scope="row">Gear B</th>
+              <td>20 $</td>
+              <td>
+                <img src="assets/images/product-2.jpg" class="w-25 h-25" alt="">
+              </td>
+              <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+              <td>30</td>
+              <td>Un Active</td>
+                <td>
+                    <button class="btn btn-dark btn-main">Edit</button>
+                    <p></p>
+                    <button class="btn btn-dark btn-main">Delete</button>
+                </td> 
+            </tr>
+          </tbody> 
+      </table> 
+      <form action="#">
+        <div class="form-group mb-4">
+          <label for="#">Enter Product Name</label>
+          <input type="text" class="form-control" placeholder="Enter Product Name">
         </div>
-  
-  
-        <div class="col-12 col-md-7 col-sm-12 col-lg-9">
-          <p>Group B</p>
+        <div class="form-group mb-4">
+          <label for="#">Image</label>
+          <input type="text" class="form-control" placeholder="Image">
         </div>
-      </div>
+        <div class="form-group mb-4">
+          <label for="#">Enter Description</label>
+          <input type="text" class="form-control" placeholder="Enter Description">
+        </div>
+        <div class="form-group mb-4">
+          <label for="#">Enter Price</label>
+          <input type="text" class="form-control" placeholder="Enter Price"> 
+        </div>
+        <div class="form-group mb-4">
+          <label for="#">Enter Amount</label>
+          <input type="text" class="form-control" placeholder="Enter Amount"> 
+        </div>
+        <div class="form-group mb-4">
+          <label for="#">Enter SaleOff</label>
+          <input type="text" class="form-control" placeholder="Enter SaleOff"> 
+        </div>
+        <div class="form-group mb-4">
+          <label for="#">Enter Type Product</label>
+          <input type="text" class="form-control" placeholder="Enter Type Product"> 
+        </div>
+
+        <button class="btn btn-block btn-main btn-dark">Save</button>
+      </form>
     </div>
   </section>
