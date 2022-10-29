@@ -17,16 +17,6 @@ public class AccountServiceImpl implements AccountService{
 	private AccountRepository accountRepo;
 
 	@Override
-	public List<Account> loginUser(String username, String password) {
-		return accountRepo.findByUsernameAndPassword(username, password);
-	}
-
-	@Override
-	public Account signup(Account account){
-		return accountRepo.save(account);
-	}
-
-	@Override
 	public List<Account> getAllAccounts() {
 		return accountRepo.findAll();
 	}
