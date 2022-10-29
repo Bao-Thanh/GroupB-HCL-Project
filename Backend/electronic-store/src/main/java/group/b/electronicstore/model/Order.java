@@ -1,6 +1,6 @@
 package group.b.electronicstore.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name = "order")
@@ -25,7 +28,8 @@ public class Order {
 	@Column(name = "phone")
 	private String phone;
 	@Column(name = "orderDate")
-	private Date orderDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	private Timestamp orderDate;
 	@Column(name = "vat")
 	private Double vat;
 	@Column(name = "safeOff")
@@ -70,11 +74,11 @@ public class Order {
 		this.phone = phone;
 	}
 
-	public Date getOrderDate() {
+	public Timestamp getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(Timestamp orderDate) {
 		this.orderDate = orderDate;
 	}
 

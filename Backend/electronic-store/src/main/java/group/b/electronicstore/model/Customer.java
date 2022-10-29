@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -38,6 +40,9 @@ public class Customer {
 	private List<Order> orderList;
 	@OneToMany(mappedBy="customer")
 	private List<Comment> commentList;
+	@OneToOne
+    @JoinColumn(name="account_id")
+	private Account account;
 	
 	public Customer() {}
 
@@ -127,5 +132,13 @@ public class Customer {
 
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 }

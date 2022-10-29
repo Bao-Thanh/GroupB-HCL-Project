@@ -16,7 +16,7 @@ public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Integer id;
+	private Long id;
 	@Column(name = "amount")
 	private Integer amount;
 	@Column(name = "productPrice")
@@ -30,11 +30,11 @@ public class OrderDetail {
 	
 	public OrderDetail() {}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
