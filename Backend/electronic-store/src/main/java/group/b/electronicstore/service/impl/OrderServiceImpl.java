@@ -75,12 +75,11 @@ public class OrderServiceImpl implements OrderService{
 		if(order.getPayment_type() > 0) {
 			existingOrder.setPayment_type(order.getPayment_type());
 		}
-		if (order.getCustomer() != null) {
+		if (customerRepo.findById(order.getCustomer().getId()) != null) {
 			existingOrder.setCustomer(order.getCustomer());
 		}
-		if (order.getOrderDetailList() != null) {
-			existingOrder.setOrderDetailList(order.getOrderDetailList());
-		}
+		existingOrder.setOrderDetailList(order.getOrderDetailList());
+
 		if (order.getTotalPrice() > 0) {
 			existingOrder.setTotalPrice(order.getTotalPrice());
 		}

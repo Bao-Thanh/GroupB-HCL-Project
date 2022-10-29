@@ -40,13 +40,13 @@ public class ProductController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Product> updateOrder(@PathVariable("id") long id,
+	public ResponseEntity<Product> updateProduct(@PathVariable("id") long id,
 			@RequestBody Product product){
 		return new ResponseEntity<Product> (proSer.updateProduct(product, id), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteOrder(@PathVariable("id") long id){
+	public ResponseEntity<String> deleteProduct(@PathVariable("id") long id){
 		proSer.deleteProduct(id);
 		return new ResponseEntity<String> ("Delete Product successfully!.", HttpStatus.OK);
 	}
