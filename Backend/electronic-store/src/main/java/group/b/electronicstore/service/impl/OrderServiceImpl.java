@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import group.b.electronicstore.exception.ResourceNotFoundException;
 import group.b.electronicstore.model.Order;
 import group.b.electronicstore.model.OrderDetail;
+import group.b.electronicstore.payload.request.OrderRequest;
 import group.b.electronicstore.repository.CustomerRepository;
 import group.b.electronicstore.repository.OrderDetailRepository;
 import group.b.electronicstore.repository.OrderRepository;
@@ -21,11 +22,17 @@ public class OrderServiceImpl implements OrderService{
 
 	@Autowired
 	private OrderRepository orderRepo;
+	@Autowired
 	private CustomerRepository customerRepo;
+	@Autowired
 	private OrderDetailRepository orderDetailRepo;
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    @Override
+   	public List<Order> getAllOrders() {
+   		return orderRepo.findAll();
+   	}
     
 	@Override
 	public Order getOrderById(long id) {
@@ -34,17 +41,31 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Order createOrder(Order order) {
+	public Order createOrder(OrderRequest orders) {
 		List<OrderDetail> list = new ArrayList<>();
-
-		for(OrderDetail od:order.getOrderDetailList()){
-			OrderDetail existOrderDetail = orderDetailRepo.findById(od.getId()).orElseThrow(() -> 
-			new ResourceNotFoundException("Order", "OrderDetail", od.getId()));
-			list.add(existOrderDetail);
-		}
-		order.setOrderDetailList(list);
-		order.setTotalPrice(totalPrice(order.getId()));
+		Order order = new Order(orders.getAddress(),orders.getPhone(), orders.getVat(), orders.getSafeOff(),
+				orders.getStatus(), orders.getState(), orders.getTotalPrice(),orders.getPayment_type(), orders.getCustomer());
 		orderRepo.save(order);
+		Order orderId = new Order(order.getId());
+		List<OrderDetail> listOrderDeatil = orders.getOrderDetail();
+		double total = 0;
+		for (OrderDetail d: listOrderDeatil) {
+			
+			total += d.getProductPrice() * d.getAmount();
+			//OrderDetail ood = new OrderDetail(d.getAmount(),d.getProductPrice(),d.getProduct(), orders);
+			d.setOrder(orderId);
+			orderDetailRepo.save(d);
+		}
+		//orderDetailRepo.saveAll(orders.getOrderdetail());
+//		for(OrderDetail od:order.getOrderDetailList()){
+//			OrderDetail existOrderDetail = orderDetailRepo.findById(od.getId()).orElseThrow(() -> 
+//			new ResourceNotFoundException("Order", "OrderDetail", od.getId()));
+//			orderDetailRepo.save(existOrderDetail);
+//			list.add(existOrderDetail);
+//		}
+		order.setOrderDetailList(listOrderDeatil);
+		order.setTotalPrice(totalPrice(order.getId()));
+//		orderRepo.save(order);
 		return order;
 	}
 
@@ -91,8 +112,8 @@ public class OrderServiceImpl implements OrderService{
 	public void deleteOrder(long id) {
 		orderRepo.findById(id).orElseThrow(() -> 
 		new ResourceNotFoundException("Order", "Id", id));
+		orderDetailRepo.removeItem(id);
 		orderRepo.deleteById(id);
-
 	}
 
 	@Override

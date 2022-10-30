@@ -145,4 +145,37 @@ public class Order {
 	public void setOrderDetailList(List<OrderDetail> orderDetailList) {
 		this.orderDetailList = orderDetailList;
 	}
+
+	public Order(String address, String phone, Double vat, Double safeOff, String status,
+			Integer state, Double totalPrice, Integer payment_type, Customer customer) {
+		super();
+		this.address = address;
+		this.phone = phone;
+		this.vat = vat;
+		this.safeOff = safeOff;
+		this.status = status;
+		this.state = state;
+		this.totalPrice = totalPrice;
+		this.payment_type = payment_type;
+		this.customer=customer;
+	}
+	
+	
+
+	public Order(Long id, String address, String phone, Integer state, Double totalPrice, Integer payment_type) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.phone = phone;
+		this.state = state;
+		this.totalPrice = totalPrice;
+		this.payment_type = payment_type;
+	}
+
+	public Order(Long id) {
+		super();
+		this.id = id;
+	}
+	
+	
 }

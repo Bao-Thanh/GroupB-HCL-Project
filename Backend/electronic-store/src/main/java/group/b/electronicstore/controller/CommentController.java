@@ -3,6 +3,7 @@ package group.b.electronicstore.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ public class CommentController {
 	private CommentService comSer;
 
 	@PostMapping("/save/{cus_id}/{pro_id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<Comment> createComment(@RequestBody Comment comment, 
 			@PathVariable("cus_id") long cusId,
 			@PathVariable("pro_id") long proId){
@@ -28,6 +30,7 @@ public class CommentController {
 	}
 
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<String> deleteComment(@PathVariable("id") long comId){
 		comSer.deleteComment(comId);
 		return new ResponseEntity<String> ("Delete Comment successfully!.", HttpStatus.OK);
