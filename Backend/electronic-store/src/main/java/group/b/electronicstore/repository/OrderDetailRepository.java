@@ -12,5 +12,9 @@ import group.b.electronicstore.model.OrderDetail;
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long>{
 	
 	@Query("select d from OrderDetail d where d.order.id = ?1")
-	List<OrderDetail> getDetailByOrder(long order_id);	
+	List<OrderDetail> getDetailByOrder(long order_id);
+	
+	@Query("select d from OrderDetail d where d.product.id = ?1")
+	List<OrderDetail> getDetailByProduct (long product_id);
+		
 }
