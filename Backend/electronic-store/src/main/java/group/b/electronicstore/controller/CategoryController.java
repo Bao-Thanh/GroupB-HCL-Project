@@ -20,7 +20,7 @@ import group.b.electronicstore.model.Category;
 import group.b.electronicstore.service.CategoryService;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController {

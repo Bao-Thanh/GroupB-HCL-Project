@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import group.b.electronicstore.model.Product;
 import group.b.electronicstore.service.ProductService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/product/order")
 public class ProductController {

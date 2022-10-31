@@ -21,7 +21,7 @@ import group.b.electronicstore.model.Customer;
 import group.b.electronicstore.model.Order;
 import group.b.electronicstore.service.CustomerService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
@@ -30,7 +30,6 @@ public class CustomerController {
 	private CustomerService cusSer;
 
 	@PostMapping("/save")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer){
 		return new ResponseEntity<Customer>(cusSer.save(customer), HttpStatus.CREATED);
 	}

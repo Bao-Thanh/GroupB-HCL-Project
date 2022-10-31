@@ -1,5 +1,7 @@
 package group.b.electronicstore.payload.request;
 
+import group.b.electronicstore.model.Customer;
+
 public class SignupRequest {
     private String username;
 
@@ -9,6 +11,7 @@ public class SignupRequest {
 
     private String status;
     
+    private Customer customer;
     public String getUsername() {
         return username;
     }
@@ -40,6 +43,14 @@ public class SignupRequest {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
     
     

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import group.b.electronicstore.model.OrderDetail;
 import group.b.electronicstore.service.OrderDetailService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/orderdetail")
 public class OrderDetailController {

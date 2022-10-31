@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import group.b.electronicstore.model.Order;
+import group.b.electronicstore.model.OrderDetail;
 import group.b.electronicstore.payload.request.OrderRequest;
 import group.b.electronicstore.service.OrderService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
@@ -39,6 +40,7 @@ public class OrderController {
 	public ResponseEntity<Order> saveOrder(@RequestBody OrderRequest order){
 		return new ResponseEntity<Order>(ordSer.createOrder(order), HttpStatus.CREATED);
 	}
+	
 //	@PostMapping("/create")
 //	public ResponseEntity<Order> saveOrder(@RequestBody Order order){
 //		return new ResponseEntity<Order>(ordSer.createOrder(order), HttpStatus.CREATED);
@@ -51,11 +53,17 @@ public class OrderController {
 		return new ResponseEntity<Order> (ordSer.updateOrder(order, id), HttpStatus.OK);
 	}
 	
-//	@DeleteMapping("/{id}")
-//	public ResponseEntity<String> deleteOrder(@PathVariable("id") long id){
-//		ordSer.deleteOrder(id);
-//		return new ResponseEntity<String> ("Delete Order successfully!.", HttpStatus.OK);
-//	}
+	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	public ResponseEntity<Order> getOrder(@PathVariable("id") long id){
+		return new ResponseEntity<Order> (ordSer.getOrder(id), HttpStatus.OK);
+	}
+	
+	@PutMapping("/orderDetail/{id}")
+	public ResponseEntity<OrderDetail> updateOrderDetail(@PathVariable("id") long id,
+			@RequestBody OrderDetail orddetail){
+		return new ResponseEntity<OrderDetail> (ordSer.updateOrderDetail(orddetail, id), HttpStatus.OK);
+	}
 	
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")

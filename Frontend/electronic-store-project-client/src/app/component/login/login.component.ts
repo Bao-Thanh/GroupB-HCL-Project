@@ -1,30 +1,46 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { Account } from 'src/app/model/account'
 import { AuthService } from 'src/app/service/auth/auth.service'
-
+import { StorageService } from '../../service/storage/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  acc = new Account()
-  err = ''
-  constructor(private _service: AuthService, private _route: Router) {}
+  form: any = {
+    username: null,
+    password: null,
+  };
+  isLoggedIn = false;
+  isLoginFailed = false;
+  isSuccessful = false;
+  errorMessage = '';
 
-  ngOnInit(): void {}
-
-  login() {
-    try {
-      this._service.login(this.acc)
-      this._route.navigate(['/'])
-    } catch (error) {
-      this.err = 'Invalid username or password'
+  constructor(private authService: AuthService, private _route: Router, private storageService: StorageService) { }
+  ngOnInit(): void {
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
     }
   }
 
-  gotosignup() {
-    this._route.navigate(['/sigunp'])
+  onSubmit(): void {
+    const { username, password } = this.form;
+    if (username!=null&& password!=null){
+      this.authService.login(username, password).subscribe({
+        next: data => {
+          this.storageService.saveUser(data);
+          //console.log(data);
+          this.isSuccessful = true;
+          this.isLoginFailed = false;
+          this._route.navigate(['/'])
+        },
+        error: err => {
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+        }
+      });
+    }
+    else this.errorMessage="Please fill username and password";
   }
 }

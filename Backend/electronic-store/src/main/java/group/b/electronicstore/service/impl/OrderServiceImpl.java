@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
 import group.b.electronicstore.exception.ResourceNotFoundException;
 import group.b.electronicstore.model.Order;
 import group.b.electronicstore.model.OrderDetail;
+import group.b.electronicstore.model.Product;
 import group.b.electronicstore.payload.request.OrderRequest;
 import group.b.electronicstore.repository.CustomerRepository;
 import group.b.electronicstore.repository.OrderDetailRepository;
 import group.b.electronicstore.repository.OrderRepository;
+import group.b.electronicstore.repository.ProductRepository;
 import group.b.electronicstore.service.OrderService;
 
 @Service
@@ -24,6 +26,8 @@ public class OrderServiceImpl implements OrderService{
 	private OrderRepository orderRepo;
 	@Autowired
 	private CustomerRepository customerRepo;
+	@Autowired
+	private ProductRepository productRepo;
 	@Autowired
 	private OrderDetailRepository orderDetailRepo;
 
@@ -35,7 +39,7 @@ public class OrderServiceImpl implements OrderService{
    	}
     
 	@Override
-	public Order getOrderById(long id) {
+	public Order getOrder(long id) {
 		return orderRepo.findById(id).orElseThrow(() -> 
 		new ResourceNotFoundException("Order", "Id", id));
 	}
@@ -124,6 +128,38 @@ public class OrderServiceImpl implements OrderService{
 			total += d.getProductPrice() * d.getAmount();
 		}
 		return total;
+	}
+	
+	@Override
+	public OrderDetail updateOrderDetail (OrderDetail orddetail, long id) {
+		OrderDetail exist = orderDetailRepo.findById(id).orElseThrow(() -> 
+		new ResourceNotFoundException("OrderDetail", "Id", id));
+		Product product = productRepo.findById(orddetail.getProduct().getId()).orElseThrow(() -> 
+		new ResourceNotFoundException("Product", "Id", orddetail.getProduct().getId()));
+		
+		//stack
+//		List<OrderDetail> listOrddetail = orddetailRepo.getDetailByOrder(orddetail.getOrder().getId());
+//		for(OrderDetail d:listOrddetail) {
+//			if(d.getProduct().getId()==orddetail.getProduct().getId()) {
+//				orddetailRepo.delete(d);
+//				d.setAmount(d.getAmount()+orddetail.getAmount());
+//				orddetailRepo.save(d);
+//				autoUpdateOrd(d);
+//				return d;
+//			}
+//		}
+		
+		if(product!=null) {
+			exist.setProduct(orddetail.getProduct());
+		}
+		if(orderRepo.findById(orddetail.getOrder().getId())!=null) {
+			exist.setOrder(orddetail.getOrder());
+		}
+		if(orddetail.getAmount()>0) {
+			exist.setAmount(orddetail.getAmount());
+		}
+		orderDetailRepo.save(exist);
+		return exist;
 	}
 
 }

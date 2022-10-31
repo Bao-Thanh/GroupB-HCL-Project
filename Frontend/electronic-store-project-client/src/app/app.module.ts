@@ -21,7 +21,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { ProfileDetailComponent } from './component/profile-detail/profile-detail.component';
 import { OrderDetailComponent } from './component/order-detail/order-detail.component';
 import { MenuInfoComponent } from './component/menu-info/menu-info.component';
-
+import { httpInterceptorProviders } from './helpers/http.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +48,7 @@ import { MenuInfoComponent } from './component/menu-info/menu-info.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

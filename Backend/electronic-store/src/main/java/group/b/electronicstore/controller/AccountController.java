@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import group.b.electronicstore.model.Account;
 import group.b.electronicstore.service.AccountService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {

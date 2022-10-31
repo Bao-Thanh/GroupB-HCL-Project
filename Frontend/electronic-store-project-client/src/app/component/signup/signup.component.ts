@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { Account } from 'src/app/model/account'
 import { AuthService } from 'src/app/service/auth/auth.service'
+import { CustomerService } from 'src/app/service/customer/customer.service'
 
 @Component({
   selector: 'app-signup',
@@ -9,12 +9,47 @@ import { AuthService } from 'src/app/service/auth/auth.service'
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  acc = new Account()
-  constructor(private _service: AuthService, private _route: Router) {}
+  form: any = {
+    username: null,
+    password: null,
+    cfpassword: null,
+  };
+  customer : any = {
+    name: null,
+    age: null,
+    gender: null,
+    address: null,
+    phone: null,
+    email: null,
+    status:"active"
+  }
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
+  constructor(private _service: AuthService, private __service: CustomerService, private _route: Router) {}
 
-  ngOnInit(): void {}
-  signup() {
-    this._service.signup(this.acc)
-    this._route.navigate(['/login'])
+  ngOnInit(): void {
+  }
+  onSubmit(): void {
+    const { username, password, cfpassword } = this.form;
+    const status = "active";
+    const role = "user";
+    const customer = this.customer;
+    console.log("cus",customer)
+    if(username!=null&&password!=null&&cfpassword!=null&&customer.name!=null&&customer.age!=null&&customer.gender!=null&&customer.address!=null&&customer.phone!=null&&customer.email!=null){
+      if (password===cfpassword) {
+        this._service.register(username, password, status, role, customer).subscribe({
+          next: data => {
+            console.log(data);
+            this.isSuccessful = true;
+            this.isSignUpFailed = false;
+          },
+          error: err => {
+            this.errorMessage = err.error.message;
+            this.isSignUpFailed = true;
+          }
+        });
+      } else this.errorMessage='ConfirmPassword is not true';
+    }else this.errorMessage="Please fill info";
   }
 }

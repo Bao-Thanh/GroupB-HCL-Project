@@ -9,16 +9,18 @@
               Don’t have an account?
               <a href="/signup">Create a free account</a>
             </p>
+            <small class="text-danger text-center">{{errorMessage}}</small>
           </div>
 
-          <form #loginform="ngForm" (ngSubmit)="login()">
+          <form *ngIf="!isSuccessful" #loginform="ngForm" (ngSubmit)="onSubmit()" name="form">
             <div class="form-group mb-4">
               <label for="#">Enter username</label>
               <input
                 type="text"
                 class="form-control"
+                name="username"
                 placeholder="Enter Username"
-                [(ngModel)]="acc.username"
+                [(ngModel)]="form.username"
                 #username="ngModel"
               />
             </div>
@@ -26,15 +28,15 @@
               <label for="#">Enter Password</label>
               <!-- <a class="float-right" href="/forgot-password">Forget password?</a> -->
               <input
-                type="text"
+                type="password"
                 class="form-control"
+                name="password"
                 placeholder="Enter Password"
-                [(ngModel)]="acc.password"
+                [(ngModel)]="form.password"
                 #password="ngModel"
               />
             </div>
             <button class="btnn btn-main mt-3 btn-block" [disabled]="loginform.form.invalid" type="submit">Login</button>
-            <small class="text-danger">{{ err }}</small>
           </form>
         </div>
       </div>
