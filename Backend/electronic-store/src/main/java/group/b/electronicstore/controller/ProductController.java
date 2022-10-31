@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import group.b.electronicstore.model.Category;
 import group.b.electronicstore.model.Product;
 import group.b.electronicstore.service.ProductService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
 @RestController
-@RequestMapping("/product/order")
+@RequestMapping("/api/product")
 public class ProductController {
 	
 	@Autowired
@@ -39,10 +40,16 @@ public class ProductController {
 		return new ResponseEntity<Product> (proSer.getProductById(id), HttpStatus.OK);
 	}
 	
-	@PostMapping("/create")
+	@GetMapping("/getByCategory/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	public ResponseEntity<List<Product>> getProctByCategoryId(@PathVariable("id") long id){
+		return new ResponseEntity<List<Product>> (proSer.getProctByCategoryId(id), HttpStatus.OK);
+	}
+	
+	@PostMapping("/createByCategory/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<Product> saveProduct(@RequestBody Product product){
-		return new ResponseEntity<Product>(proSer.creatProduct(product), HttpStatus.CREATED);
+	public ResponseEntity<Product> createProduct(@PathVariable("id") long id,@RequestBody Product product){
+		return new ResponseEntity<Product>(proSer.createProduct(product,id), HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{id}")

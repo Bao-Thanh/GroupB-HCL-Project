@@ -1,12 +1,15 @@
 package group.b.electronicstore.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import group.b.electronicstore.exception.ResourceNotFoundException;
+import group.b.electronicstore.model.Category;
 import group.b.electronicstore.model.Comment;
+import group.b.electronicstore.model.Customer;
 import group.b.electronicstore.model.Order;
 import group.b.electronicstore.model.Product;
 import group.b.electronicstore.repository.CategoryRepository;
@@ -20,8 +23,11 @@ public class ProductServiceImpl implements ProductService{
 
 	@Autowired
 	ProductRepository productRepo;
+	@Autowired
 	CommentRepository commentRepo;
+	@Autowired
 	SupplierRepository supplierRepo;
+	@Autowired
 	CategoryRepository categoryRepo;
 
 	@Override
@@ -41,7 +47,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product creatProduct(Product product) {
+	public Product createProduct(Product product, long id) {
+		Category existingCategory = categoryRepo.findById(id).orElseThrow(() -> 
+		new ResourceNotFoundException("Category", "Id", id));
+		product.setCategory(existingCategory);
 		return productRepo.save(product);
 	}
 
@@ -87,5 +96,11 @@ public class ProductServiceImpl implements ProductService{
 		productRepo.findById(id).orElseThrow(() -> 
 		new ResourceNotFoundException("Product", "Id", id));
 		productRepo.deleteById(id);
+	}
+
+	@Override
+	public List<Product> getProctByCategoryId(long id) {
+		List<Product> p = productRepo.getProductByCategoryId(id);
+		return p;
 	}
 }

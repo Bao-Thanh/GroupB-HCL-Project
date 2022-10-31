@@ -30,14 +30,12 @@
 
                 <div class="heading d-flex justify-content-between mb-5">
                   <p class="result-count mb-0"> Showing 1–6 of 17 results</p>
-                  <form class="ordering " method="get">
-                      <select name="orderby" class="orderby form-control" aria-label="Shop order" >
-                          <option value="" selected="selected">Categories</option>
-                          <option value="">A</option>
-                          <option value="">B</option>
-                          <option value="">C</option>
-                          <option value="">D</option>
-                          <option value="">E</option>
+                  <form class="ordering ">
+                      <select class="orderby form-control" (change)="ngOnClick($event)">
+                        <option value="all" selected="selected">All</option>
+                        <option value="{{item.id}}"*ngFor="let item of category">{{item.name}}</option>
+                          <!-- <option value="" selected="selected">All</option>
+                          <option value="" *ngFor="let item of category">{{item.name}}</option> -->
                       </select>
                       <input type="hidden" name="paged" value="1">
                   </form>
@@ -45,10 +43,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-4 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let product of products">
+            <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let product of products">
       	      <div class="product">
                 <div class="product-wrap img_border">
-                  <a routerLink="/product/{{product.id}}"><img class="img-fluid w-100 mb-3 img-first" src="{{product.imageUrls}}" alt="product-img" /></a>
+                  <a routerLink="/product/{{product.id}}"><img class="img-thumbnail w-100 mb-3 img-first" src="{{product.image}}" alt="product-img" /></a>
                 </div>
 
                 <span class="onsale">Sale</span>
@@ -65,30 +63,8 @@
                 </div>
               </div>
             </div>
-        <div class="col-12">
-            <nav aria-label="Page navigation">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
         </div>
         </div>				
-      </div>
-          
-      <div class="col-md-3">
       </div>
     </div>
   </div>

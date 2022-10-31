@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -35,9 +37,11 @@ public class Product {
 	private String description;
 	@ManyToOne
     @JoinColumn(name="category_id")
+	@JsonIgnore
 	private Category category;
 	@ManyToOne
     @JoinColumn(name="supplier_id")
+	@JsonIgnore
 	private Supplier supplier;
 	@OneToMany(mappedBy="product")
 	private List<Comment> commentList;

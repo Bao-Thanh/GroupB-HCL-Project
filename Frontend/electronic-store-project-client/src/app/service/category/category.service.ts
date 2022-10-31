@@ -3,19 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8094/api/product/';
+const API_URL = 'http://localhost:8094/api/category/';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
-
+export class CategoryService {
   constructor(private http: HttpClient) { }
 
-  getAllProduct(): Observable<any> {
+  getAllCategory(): Observable<any> {
     return this.http.get(API_URL + 'viewall');
   }
 
-  getProductByID(id: number): Observable<any> {
+  getCategoryByID(id: number): Observable<any> {
     return this.http.get(API_URL + `${id}`);
   }
 }
