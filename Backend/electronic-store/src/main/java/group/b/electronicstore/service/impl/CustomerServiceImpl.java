@@ -30,8 +30,9 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public Customer getCustomerById(long id) {
-		return customerRepo.findById(id).orElseThrow(() -> 
-		new ResourceNotFoundException("Customer", "Id", id));
+		return customerRepo.getCustomerByAccountId(id);
+//		return customerRepo.getCustomerByAccountId(id).orElseThrow(() -> 
+//		new ResourceNotFoundException("Customer By Account", "Id", id));
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService{
 		if (!customer.getName().equals("")) {
 			existingCustomer.setName(customer.getName());
 		}
-		if (customer.getAge() <= 0) {
+		if (!customer.getAge().equals("")) {
 			existingCustomer.setAge(customer.getAge());
 		}
 		if (!customer.getGender().equals("")) {
@@ -56,21 +57,11 @@ public class CustomerServiceImpl implements CustomerService{
 		if (!customer.getEmail().equals("")) {
 			existingCustomer.setEmail(customer.getEmail());
 		}
-		if (customer.getType() < 0) {
+		if (!customer.getType().equals(null)) {
 			existingCustomer.setType(customer.getType());
 		}
-		if (!customer.getStatus().equals("")) {
+		if (!customer.getStatus().equals(null)) {
 			existingCustomer.setStatus(customer.getStatus());
-		}
-		if (customer.getOrderList() == null) {
-			existingCustomer.setOrderList(customer.getOrderList());
-
-		}
-		if (customer.getCommentList() == null) {
-			existingCustomer.setCommentList(customer.getCommentList());
-		}
-		if (customer.getAccount() == null) {
-			existingCustomer.setAccount(customer.getAccount());
 		}
 		customerRepo.save(existingCustomer);
 		return existingCustomer;

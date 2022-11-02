@@ -23,30 +23,30 @@
   <section class="user-dashboard page-wrapper">
     <div class="container">
       <div class="row">
-        <div class="col-12 col-md-5 col-sm-12 col-lg-3">
+        <!-- <div class="col-12 col-md-5 col-sm-12 col-lg-3">
           <app-menu-info></app-menu-info>
-        </div>
+        </div> -->
   
-        <div class="col-12 col-md-7 col-sm-12 col-lg-9">
+        <div class="col-12 col-md-7 col-sm-12 col-lg-12">
           <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Order</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Total</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Adress</th>
+                    <th scope="col">Total Price</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">#1012</th>
-                    <td>June 11, 2019 </td>
-                    <td>Completed</td>
-                    <td>30</td> 
-                    <td><a routerLink="/order-detail" class="btn btn-dark btn-small">View</a></td> 
+                <tr *ngFor="let order of orders">
+                    <th scope="row">{{order.id}}</th>
+                    <td>{{order.phone}}</td>
+                    <td>{{order.address}}</td>
+                    <td>{{order.totalPrice}}</td> 
+                    <td><a routerLink="/order/{{order.id}}" class="btn btn-dark btn-small">View</a></td> 
                 </tr> 
-                <tr> 
+                <!-- <tr> 
                     <th scope="row">#2214</th> 
                     <td>March 10, 2019</td> 
                     <td>Completed</td> 
@@ -55,7 +55,7 @@
                         <a routerLink="/order-detail" class="btn btn-dark btn-small">View</a>
                     </td> 
                 </tr> 
-                <tr> 
+                <tr > 
                     <th scope="row">#3434</th> 
                     <td>February 11, 2019</td> 
                     <td>Pending</td> <td>25</td> 
@@ -67,7 +67,7 @@
                   <td>Processsing</td> 
                   <td>56</td> 
                   <td><a routerLink="/order-detail" class="btn btn-dark btn-small">View</a></td> 
-                </tr> 
+                </tr>  -->
               </tbody> 
             </table> 
           </div> 

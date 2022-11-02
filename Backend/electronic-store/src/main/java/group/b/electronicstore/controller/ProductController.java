@@ -40,12 +40,6 @@ public class ProductController {
 		return new ResponseEntity<Product> (proSer.getProductById(id), HttpStatus.OK);
 	}
 	
-	@GetMapping("/getByCategory/{id}")
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-	public ResponseEntity<List<Product>> getProctByCategoryId(@PathVariable("id") long id){
-		return new ResponseEntity<List<Product>> (proSer.getProctByCategoryId(id), HttpStatus.OK);
-	}
-	
 	@PostMapping("/createByCategory/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Product> createProduct(@PathVariable("id") long id,@RequestBody Product product){

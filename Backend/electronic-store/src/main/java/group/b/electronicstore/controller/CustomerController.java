@@ -34,10 +34,10 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(cusSer.save(customer), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/profile-detail/{id}")
+	@GetMapping("/profile-detail/{accountId}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-	public ResponseEntity<Customer> getCustomerById(@PathVariable("id") long cusId){
-		return new ResponseEntity<Customer> (cusSer.getCustomerById(cusId), HttpStatus.OK);
+	public ResponseEntity<Customer> getCustomerById(@PathVariable("accountId") long accountId){
+		return new ResponseEntity<Customer> (cusSer.getCustomerById(accountId), HttpStatus.OK);
 	}
 
 	@GetMapping("/viewall")

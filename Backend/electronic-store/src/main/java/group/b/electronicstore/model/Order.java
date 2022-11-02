@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -44,6 +45,7 @@ public class Order {
 	private Integer payment_type;
 	@ManyToOne
     @JoinColumn(name="account_id")
+	@JsonIgnore
 	private Customer customer;
 	@OneToMany(mappedBy="order")
 	private List<OrderDetail> orderDetailList;

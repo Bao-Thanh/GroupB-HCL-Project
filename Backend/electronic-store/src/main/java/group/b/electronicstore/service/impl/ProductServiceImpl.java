@@ -60,33 +60,18 @@ public class ProductServiceImpl implements ProductService{
 		new ResourceNotFoundException("Product", "Id", id));
 
 		if (!product.getName().equals("")) {
-			existingProduct.setName(existingProduct.getName());
+			existingProduct.setName(product.getName());
 		}
 		if (product.getPrice() > 0) {
-			existingProduct.setPrice(existingProduct.getPrice());
+			existingProduct.setPrice(product.getPrice());
 		}
-		if (product.getSaleOff() > 0) {
-			existingProduct.setSaleOff(existingProduct.getSaleOff());
-		}
-		if (!product.getStatus().equals("")) {
-			existingProduct.setStatus(existingProduct.getStatus());
-		}
+		existingProduct.setSaleOff(product.getSaleOff());
 		if (!product.getImage().equals("")) {
-			existingProduct.setImage(existingProduct.getImage());
+			existingProduct.setImage(product.getImage());
 		}
-		if (product.getAmount() > 0) {
-			existingProduct.setAmount(existingProduct.getAmount());
-		}
-		if (!product.getDescription().equals("")) {
-			existingProduct.setDescription(existingProduct.getDescription());
-		}
-		if (categoryRepo.findById(product.getCategory().getId()) != null) {
-			existingProduct.setCategory(product.getCategory());
-		}
-		if (supplierRepo.findById(product.getSupplier().getId()) != null) {
-			existingProduct.setSupplier(product.getSupplier());
-		}
-		existingProduct.setCommentList(product.getCommentList());
+		existingProduct.setAmount(product.getAmount());
+		existingProduct.setDescription(product.getDescription());
+		//existingProduct.setCommentList(product.getCommentList());
 		productRepo.save(existingProduct);
 		return existingProduct;
 	}
@@ -96,11 +81,5 @@ public class ProductServiceImpl implements ProductService{
 		productRepo.findById(id).orElseThrow(() -> 
 		new ResourceNotFoundException("Product", "Id", id));
 		productRepo.deleteById(id);
-	}
-
-	@Override
-	public List<Product> getProctByCategoryId(long id) {
-		List<Product> p = productRepo.getProductByCategoryId(id);
-		return p;
 	}
 }

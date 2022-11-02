@@ -45,6 +45,11 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
+	public List<OrderDetail> getOrderDetail(long id) {
+		return orderDetailRepo.findByOrderId(id);
+	}
+	
+	@Override
 	public Order createOrder(OrderRequest orders) {
 		List<OrderDetail> list = new ArrayList<>();
 		Order order = new Order(orders.getAddress(),orders.getPhone(), orders.getVat(), orders.getSafeOff(),
@@ -68,7 +73,7 @@ public class OrderServiceImpl implements OrderService{
 //			list.add(existOrderDetail);
 //		}
 		order.setOrderDetailList(listOrderDeatil);
-		order.setTotalPrice(totalPrice(order.getId()));
+		order.setTotalPrice(total);
 //		orderRepo.save(order);
 		return order;
 	}

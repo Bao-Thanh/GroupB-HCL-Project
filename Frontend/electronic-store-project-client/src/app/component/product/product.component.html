@@ -29,7 +29,6 @@
                 <h2 class="d-block text-left-sm">Product</h2>
 
                 <div class="heading d-flex justify-content-between mb-5">
-                  <p class="result-count mb-0"> Showing 1–6 of 17 results</p>
                   <form class="ordering ">
                       <select class="orderby form-control" (change)="ngOnClick($event)">
                         <option value="all" selected="selected">All</option>
@@ -51,7 +50,7 @@
 
                 <span class="onsale">Sale</span>
                 <div class="product-hover-overlay">
-                  <a href="#"><i class="tf-ion-android-cart"></i></a>
+                  <a href="/product" ><i class="tf-ion-android-cart" (click)="addToCart(product)"></i></a>
                   <a href="#"><i class="tf-ion-ios-heart"></i></a>
                 </div>
 

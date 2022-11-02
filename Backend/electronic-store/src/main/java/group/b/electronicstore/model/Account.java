@@ -22,7 +22,6 @@ public class Account {
 	private String role;
 	@Column(name = "status")
 	private String status;
-
 	public Account() {}
 
 	public Long getId() {

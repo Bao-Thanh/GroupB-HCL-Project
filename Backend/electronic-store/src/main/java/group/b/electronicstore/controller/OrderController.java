@@ -52,7 +52,11 @@ public class OrderController {
 			@RequestBody Order order){
 		return new ResponseEntity<Order> (ordSer.updateOrder(order, id), HttpStatus.OK);
 	}
-	
+	@GetMapping("/orderDetail/{id}")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	public ResponseEntity<List<OrderDetail>> getOrderDetail(@PathVariable("id") long id){
+		return new ResponseEntity<List<OrderDetail>> (ordSer.getOrderDetail(id), HttpStatus.OK);
+	}
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<Order> getOrder(@PathVariable("id") long id){

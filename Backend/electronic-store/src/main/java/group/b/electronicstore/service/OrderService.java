@@ -22,4 +22,6 @@ public interface OrderService {
 	Order getOrder(long id);
 	
 	OrderDetail updateOrderDetail(OrderDetail orderdetail, long id);
+
+	List<OrderDetail> getOrderDetail(long id);
 }

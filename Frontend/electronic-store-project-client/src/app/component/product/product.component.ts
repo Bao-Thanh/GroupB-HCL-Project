@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from 'src/app/service/category/category.service';
-import {ProductService} from '../../service/product/product.service'
+import {ProductService} from '../../service/product/product.service';
+import {CartService} from '../../service/storage/cart.service';
 //import {Product} from '../../mock-test/product'
 @Component({
   selector: 'app-product',
@@ -13,8 +14,11 @@ export class ProductComponent implements OnInit {
   productlists : any = {}
   products : any = {}
   category : any = {}
+  items : any =[];
   errorMessage='';
-  constructor(private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, 
+    private categoryService: CategoryService, 
+    private route: ActivatedRoute, private cartService: CartService,) { }
 
   // ngOnInit(): void {
   //   this.products = this.productService.getProducts();
@@ -56,4 +60,12 @@ export class ProductComponent implements OnInit {
     }
   });
   }}
+
+  addToCart(item:any) {
+    if (!this.cartService.itemInCart(item)) {
+      item.qtyTotal = 1;
+      this.cartService.addToCart(item); //add items in cart
+      //this.items = [...this.cartService.getItems()];
+    }
+  }
 }

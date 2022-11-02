@@ -101,7 +101,7 @@
     <a class="navbar-brand" href="#">
       <img src="assets/images/bgroup.jpg" width="30" height="30" alt="" />
     </a>
-    <a class="navbar-brand font-weight-bold" routerLink="/">
+    <a class="navbar-brand font-weight-bold" routerLink="/product">
       Group B Electrics Store
     </a>
 
@@ -119,27 +119,37 @@
 
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" routerLink="/product">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/order">Orders</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/login">Login Page</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/signup">SignUp Page</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/dashboard">Dahsboard</a></li>
+        <!-- <li class="nav-item dropdown dropdown-slide">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown3"
+            role="button"
+            data-delay="350"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Shop
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+            <li><a routerLink="/order">Orders</a></li>
+            <li><a routerLink="/profile-details">Profile Details</a></li>
+            <li><a routerLink="/login">Login Page</a></li>
+            <li><a routerLink="/signup">SignUp Page</a></li>
+          </ul>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
-
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
-          </li> -->
-        <!-- Pages -->
-        <!-- <li class="nav-item dropdown dropdown-slide">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-delay="350"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Pages
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">404 Page</a></li>
-            </ul>
-          </li> -->
-        <!-- /Pages -->
-        <!-- / Blog -->
-
+        <li><a routerLink="/product">Product</a></li>
+        <li><a routerLink="/checkout">Checkout</a></li>
+        <li><a routerLink="/cart">Cart</a></li>
         <li class="nav-item dropdown dropdown-slide">
           <a
             class="nav-link dropdown-toggle"
@@ -158,10 +168,11 @@
             <li><a routerLink="/checkout">Checkout</a></li>
             <li><a routerLink="/cart">Cart</a></li>
           </ul>
-        </li>
+        </li> -->
 
         <!-- PAGE -->
-        <li class="nav-item dropdown dropdown-slide">
+
+        <!-- <li class="nav-item dropdown dropdown-slide">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -180,9 +191,9 @@
             <li><a routerLink="/profile-details">Profile Details</a></li>
             <li><a routerLink="/login">Login Page</a></li>
             <li><a routerLink="/signup">SignUp Page</a></li>
-            <!-- <li><a routerLink="/forgot-password">Forgot Password</a></li> -->
           </ul>
-        </li>
+        </li> -->
+
         <!-- / Account -->
       </ul>
     </div>

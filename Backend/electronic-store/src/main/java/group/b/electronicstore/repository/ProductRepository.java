@@ -10,6 +10,5 @@ import group.b.electronicstore.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>{
-	@Query("select p from Product p where p.category.id = ?1")
-	List<Product> getProductByCategoryId(long id);
+
 }

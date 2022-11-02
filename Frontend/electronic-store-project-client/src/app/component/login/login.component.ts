@@ -26,14 +26,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const { username, password } = this.form;
-    if (username!=null&& password!=null){
+    if (username!=""&& password!=""){
       this.authService.login(username, password).subscribe({
         next: data => {
           this.storageService.saveUser(data);
           //console.log(data);
           this.isSuccessful = true;
           this.isLoginFailed = false;
-          this._route.navigate(['/'])
+          this._route.navigate(['/product'])
         },
         error: err => {
           this.errorMessage = err.error.message;
