@@ -13,7 +13,8 @@ export class CartComponent implements OnInit {
      private storageService:StorageService, private customerService:CustomerService) { }
   errorMessage='';
   products: any[] = [];
-  subTotal!: any;
+  productPrice=0;
+  subTotal=0;
   customer:any={};
   amount=1;
   info:any={
@@ -22,6 +23,12 @@ export class CartComponent implements OnInit {
   }
   ngOnInit(): void {
     this.products = JSON.parse(localStorage.getItem('cart_items') as any) || [];
+    for (var product of this.products) {
+      const amount=this.amount;
+      const productPrice=amount*product.price;
+      this.productPrice = productPrice;
+      this.subTotal = this.subTotal + productPrice;
+    }
     const id = this.storageService.getUser().id;
     this.customerService.getCustomerByIdAccount(id).subscribe({
       next: data => {
@@ -54,6 +61,8 @@ export class CartComponent implements OnInit {
       const amount=this.amount;
       const productPrice=amount*product.price;
       let odd:any={amount,productPrice,product}
+      this.productPrice = productPrice;
+      this.subTotal = this.subTotal + productPrice;
       orderDetail.push(odd);
     }
     const {address, phone}=this.info;

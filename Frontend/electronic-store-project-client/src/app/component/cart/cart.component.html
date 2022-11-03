@@ -63,8 +63,8 @@
                               <td class="product-subtotal" data-title="Total">
                                   <span class="amount">
                                     <span class="currencySymbol">
-  <pre wp-pre-tag-3=""></pre>
-                                    </span>90.00</span>
+                                      <pre wp-pre-tag-3=""></pre>
+                                    </span>{{product.price}}</span>
                               </td>
                                <td class="product-remove" data-title="Remove">
                                   <button (click)="removeFromCart(product)" class="remove" aria-label="Remove this item" data-product_id="30" data-product_sku="">×</button>
@@ -74,7 +74,7 @@
                               <td colspan="6" class="">
                                   <div class="text-center">
                                     <h5>Total</h5>
-                                    <h5>$90.00</h5>
+                                    <h5>{{subTotal}}</h5>
                                   </div>
                                 </td>
                           </tr>
