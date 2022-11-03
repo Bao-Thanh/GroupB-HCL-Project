@@ -74,7 +74,7 @@ public class OrderServiceImpl implements OrderService{
 //		}
 		order.setOrderDetailList(listOrderDeatil);
 		order.setTotalPrice(total);
-//		orderRepo.save(order);
+		orderRepo.save(order);
 		return order;
 	}
 

@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
+      this._route.navigate(['/product']);
     }
   }
 
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
           //console.log(data);
           this.isSuccessful = true;
           this.isLoginFailed = false;
-          this._route.navigate(['/product'])
+          window.location.reload();
         },
         error: err => {
           this.errorMessage = err.error.message;

@@ -13,16 +13,13 @@ export class ProductComponent implements OnInit {
   //products={}
   productlists : any = {}
   products : any = {}
+  pros: any[] = [];
   category : any = {}
   items : any =[];
   errorMessage='';
   constructor(private productService: ProductService, 
     private categoryService: CategoryService, 
-    private route: ActivatedRoute, private cartService: CartService,) { }
-
-  // ngOnInit(): void {
-  //   this.products = this.productService.getProducts();
-  // }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.categoryService.getAllCategory().subscribe({
@@ -61,11 +58,12 @@ export class ProductComponent implements OnInit {
   });
   }}
 
-  addToCart(item:any) {
-    if (!this.cartService.itemInCart(item)) {
-      item.qtyTotal = 1;
-      this.cartService.addToCart(item); //add items in cart
-      //this.items = [...this.cartService.getItems()];
+  addToCart(product: any) {
+    if (!this.productService.productInCart(product)) {
+      //product.quantity = 1;
+      this.productService.addToCart(product);
+      this.pros = [...this.productService.getProduct()];
+      //this.subTotal = product.price;
     }
   }
 }

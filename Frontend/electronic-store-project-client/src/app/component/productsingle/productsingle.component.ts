@@ -9,6 +9,7 @@ import { ProductService } from '../../service/product/product.service'
 export class ProductsingleComponent implements OnInit {
   product: any = {};
   errorMessage = '';
+  pros: any[] = [];
   constructor(private productService: ProductService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -22,5 +23,14 @@ export class ProductsingleComponent implements OnInit {
           this.errorMessage = err.error.message;
       }
     });
+    }
+
+    addToCart(product: any) {
+      if (!this.productService.productInCart(product)) {
+        //product.quantity = 1;
+        this.productService.addToCart(product);
+        this.pros = [...this.productService.getProduct()];
+        //this.subTotal = product.price;
+      }
     }
 }

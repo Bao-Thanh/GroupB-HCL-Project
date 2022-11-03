@@ -12,7 +12,7 @@ const API_URL = 'http://localhost:8094/api/product/';
   providedIn: 'root'
 })
 export class ProductService {
-
+  pros: any[] = [];
   constructor(private http: HttpClient) { }
 
   getAllProduct(): Observable<any> {
@@ -57,5 +57,37 @@ export class ProductService {
       },
       httpOptions
     );
+  }
+
+  saveCart(): void {
+    localStorage.setItem('cart_items', JSON.stringify(this.pros));
+  }
+
+  addToCart(addedProduct: any) {
+    this.pros.push(addedProduct);
+    this.saveCart();
+  }
+  getProduct() {
+    return this.pros;
+  }
+  loadCart(): void {
+    this.pros = JSON.parse(localStorage.getItem('cart_items') as any) || [];
+  }
+
+  productInCart(product: any): boolean {
+    return this.pros.findIndex((x: any) => x.id === product.id) > -1;
+  }
+
+  removeProduct(product: any) {
+    const index = this.pros.findIndex((x: any) => x.id === product.id);
+
+    if (index > -1) {
+      this.pros.splice(index, 1);
+      this.saveCart();
+    }
+  }
+
+  clearProducts() {
+    localStorage.clear();
   }
 }

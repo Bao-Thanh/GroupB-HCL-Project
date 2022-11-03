@@ -16,4 +16,16 @@ export class OrderService {
   getOrderDetailByOrderId(id: number): Observable<any> {
     return this.http.get(API_URL + 'orderDetail/' + `${id}`);
   }
+  createOrder(address: string, phone: string, customer:{}, orderDetail:[]): Observable<any> {
+    return this.http.post(
+      API_URL + 'create',
+      {
+        address,
+        phone,
+        customer,
+        orderDetail
+      },
+      httpOptions
+    );
+  }
 }
