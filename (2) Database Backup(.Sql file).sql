@@ -340,7 +340,8 @@ Insert into "SYSTEM"."account" ("id","username","password","role","status") valu
 Insert into "SYSTEM"."customer" ("id","name","age","gender","address","phone","email","type","status","account_id") values (1,'Ly Truong Son',18,'Male','333, Xo Viet Nghe Tinh, Binh Thanh District, Ho Chi Minh city, Viet Nam','0981761930','sontruong4200@gmail.com',0,'Active',1);
 Insert into "SYSTEM"."customer" ("id","name","age","gender","address","phone","email","type","status","account_id") values (2,'Nguyen Duc Manh',18,'Male','123, Ho Xuan Huong, Ha Noi, Viet Nam','0968746560','ducmanh@gmail.com',0,'Active',2);
 Insert into "SYSTEM"."customer" ("id","name","age","gender","address","phone","email","type","status","account_id") values (3,'Ngo Minh Hoang',18,'Male','223, Nguyen Trai, Binh Thanh, Ho Chi Minh city, Viet Nam','0967107960','ngohoang@gmail.com',0,'Active',3);
-Insert into "SYSTEM"."customer" ("id","name","age","gender","address","phone","email","type","status","account_id") values (4,'Nguyen Le Bao Thanh',18,'Male','110, Le Thanh, Thu Dau Mot City , Viet Nam','0125458744','van123@gmail.com',0,'Active',4);
+Insert into "SYSTEM"."customer" ("id","name","age","gender","address","phone","email","type","status","account_id") values (4,'Nguyen Dang Khanh Van',18,'Male','110, Le Thanh, Thu Dau Mot City , Viet Nam','0125458744','van@gmail.com',0,'Active',4);
+Insert into "SYSTEM"."customer" ("id","name","age","gender","address","phone","email","type","status","account_id") values (5,'Nguyen Le Bao Thanh',18,'Male','110, Le Thanh, Thu Duc City , Viet Nam','0125098737','thanh@gmail.com',0,'Active',5);
 
 --category
 Insert into "SYSTEM"."category" ("id","name","description","status") values (1,'Keyboard','Keyboard','Available');
@@ -364,7 +365,7 @@ Insert into "SYSTEM"."product" ("id","name","price","sale_off","status","image",
 --order
 Insert into "SYSTEM"."order" ("id","address","phone","order_date","vat","safe_off","status","state","total_price","payment_type","account_id") values (1,'110, Le Thanh, Thu Dau Mot City , Viet Nam','0125458744',to_timestamp('01-NOV-22 10.47.08.761000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0.0,0.0,'Pending',0,127.09,1,1);
 Insert into "SYSTEM"."order" ("id","address","phone","order_date","vat","safe_off","status","state","total_price","payment_type","account_id") values (2,'123, Ho Xuan Huong, Ha Noi, Viet Nam','0968746560',to_timestamp('11-OCT-22 10.48.14.460000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0.0,0.0,'Completed',1,176,1,3);
-Insert into "SYSTEM"."order" ("id","address","phone","order_date","vat","safe_off","status","state","total_price","payment_type","account_id") values (3,'230, Doan Van Bo, 4 District, Ho Chi Minh City, Viet Nam','0987145255',to_timestamp('28-OCT-22 10.50.10.991000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0.0,0.0,'Processing',0,1650,1,3);
+Insert into "SYSTEM"."order" ("id","address","phone","order_date","vat","safe_off","status","state","total_price","payment_type","account_id") values (3,'230, Doan Van Bo, 4 District, Ho Chi Minh City, Viet Nam','0987145255',to_timestamp('28-OCT-22 10.50.10.991000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0.0,0.0,'Processing',0,1650,1,4);
 Insert into "SYSTEM"."order" ("id","address","phone","order_date","vat","safe_off","status","state","total_price","payment_type","account_id") values (4,'320, Le Van Si street, Binh Tan District, Ho Chi Minh City, Viet Nam ','0987145245',to_timestamp('13-OCT-22 10.51.06.946000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0.0,0.0,'Completed',1,63.54,1,4);
 
 --orderdetail
