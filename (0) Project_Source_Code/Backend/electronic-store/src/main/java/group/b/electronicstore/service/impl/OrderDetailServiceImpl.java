@@ -66,7 +66,7 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		if(ordRepo.findById(orddetail.getOrder().getId())!=null) {
 			exist.setOrder(orddetail.getOrder());
 		}
-		if(orddetail.getAmount()>0) {
+		if( (orddetail.getAmount()>0) &&(orddetail.getAmount())<=orddetail.getProduct().getAmount()){
 			exist.setAmount(orddetail.getAmount());
 		}
 		orddetailRepo.save(exist);
@@ -88,7 +88,12 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		
 		if(order!= null) {
 			List<OrderDetail> newList = orddetailRepo.getDetailByOrder(orddetail.getOrder().getId());
-			order.setOrderDetailList(newList);		
+			order.setOrderDetailList(newList);
+			double total = 0;
+			for (OrderDetail d: newList) {
+				total += d.getProductPrice() * d.getAmount();
+			}
+			order.setTotalPrice(total);
 			ordRepo.save(order);			
 		}
 		

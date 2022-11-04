@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "category")
@@ -30,6 +31,7 @@ public class Category {
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id")
 	@JsonBackReference
+	@JsonIgnore
 	private Category parent_category;
 	@OneToMany(mappedBy="category")
 	private List<Product> productList;

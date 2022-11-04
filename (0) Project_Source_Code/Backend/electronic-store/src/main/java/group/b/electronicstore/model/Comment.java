@@ -24,6 +24,7 @@ public class Comment {
 	private String evaluate;
 	@ManyToOne
 	@JoinColumn(name="product_id")
+	@JsonIgnore
 	private Product product;
 	@ManyToOne
 	@JoinColumn(name="customer_id")

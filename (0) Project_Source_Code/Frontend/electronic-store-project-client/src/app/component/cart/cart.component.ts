@@ -71,6 +71,8 @@ export class CartComponent implements OnInit {
         next: data => {
           console.log(data);
           this.productService.clearProducts();
+          window.alert("Successfull");
+          window.location.reload();
         },
         error: err => {
         }
